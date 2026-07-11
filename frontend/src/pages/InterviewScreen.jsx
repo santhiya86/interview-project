@@ -234,23 +234,27 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
 
     const recognition = new SpeechRecognition();
     recognition.continuous      = true;
-    recognition.interimResults  = true;
+    recognition.interimResults = false;
     recognition.lang            = "en-US";
     recognition.maxAlternatives = 1;
 
-    recognition.onstart = () => setRecording(true);
+recognition.onresult = (event) => {
+  let finalTranscript = "";
+  let interimTranscript = "";
 
-    recognition.onresult = (event) => {
-      let interim   = "";
-      let finalPart = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const t = event.results[i][0].transcript;
-        if (event.results[i].isFinal) finalPart += t + " ";
-        else interim += t;
-      }
-      if (finalPart) finalTranscriptRef.current += finalPart;
-      setLiveText((finalTranscriptRef.current + interim).trim());
-    };
+  for (let i = 0; i < event.results.length; i++) {
+    const transcript = event.results[i][0].transcript;
+
+    if (event.results[i].isFinal) {
+      finalTranscript += transcript + " ";
+    } else {
+      interimTranscript += transcript;
+    }
+  }
+
+  finalTranscriptRef.current = finalTranscript.trim();
+  setLiveText((finalTranscript + interimTranscript).trim());
+};
 
     recognition.onerror = (event) => {
       console.error("Speech recognition error:", event.error);
