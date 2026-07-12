@@ -37,6 +37,7 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
   const timerRef           = useRef(null);
   const startTimeRef       = useRef(Date.now());
   const finalTranscriptRef = useRef("");
+  const finalResultsRef    = useRef([]);
   const timeUpHandledRef   = useRef(false); // prevent double submit on timeout
 
   const question = questions[qIdx];
@@ -220,6 +221,7 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
     setVoiceNote("");
     setLiveText("");
     finalTranscriptRef.current = "";
+     finalResultsRef.current = []; 
 
     if (!speechSupported) {
       setVoiceNote("Speech recognition is not supported in your browser. Please use Chrome or Edge on desktop, or switch to Text mode.");
@@ -241,16 +243,23 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
     recognition.onstart = () => setRecording(true);
 
     recognition.onresult = (event) => {
-      let interim   = "";
-      let finalPart = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
-        const t = event.results[i][0].transcript;
-        if (event.results[i].isFinal) finalPart += t + " ";
-        else interim += t;
-      }
-      if (finalPart) finalTranscriptRef.current += finalPart;
-      setLiveText((finalTranscriptRef.current + interim).trim());
-    };
+  recognition.onresult = (event) => {
+  let interim = "";
+  for (let i = event.resultIndex; i < event.results.length; i++) {
+    const result = event.results[i];
+    const t = result[0].transcript;
+    if (result.isFinal) {
+      // Store by index instead of appending — re-fires of the same
+      // index (which happens on Android Chrome) simply overwrite,
+      // instead of duplicating the text.
+      finalResultsRef.current[i] = t.trim();
+    } else {
+      interim += t;
+    }
+  }
+  finalTranscriptRef.current = finalResultsRef.current.filter(Boolean).join(" ") + " ";
+  setLiveText((finalTranscriptRef.current + interim).trim());
+};
 
     recognition.onerror = (event) => {
       console.error("Speech recognition error:", event.error);
