@@ -8,6 +8,31 @@ function getTime(mode) {
   return mode === "voice" ? TIMER.voice : TIMER.text;
 }
 
+// Merge new final transcript text into existing, stripping any repeated
+// overlap. Android's SpeechRecognition engine sometimes re-includes
+// previously spoken words in a new "final" result (causing "I I I put put
+// hard hard work..."). This finds the longest matching word-sequence
+// between the end of what we already have and the start of the new chunk,
+// and only appends the genuinely new part. On desktop, where results don't
+// overlap, this behaves identically to plain concatenation.
+function mergeTranscript(existing, incoming) {
+  const existingWords = existing.trim().split(/\s+/).filter(Boolean);
+  const incomingWords = incoming.trim().split(/\s+/).filter(Boolean);
+  if (existingWords.length === 0) return incoming.trim();
+  if (incomingWords.length === 0) return existing.trim();
+
+  const maxCheck = Math.min(existingWords.length, incomingWords.length);
+  let overlap = 0;
+  for (let k = maxCheck; k > 0; k--) {
+    const tail = existingWords.slice(existingWords.length - k).join(" ").toLowerCase();
+    const head = incomingWords.slice(0, k).join(" ").toLowerCase();
+    if (tail === head) { overlap = k; break; }
+  }
+
+  const newPart = incomingWords.slice(overlap).join(" ");
+  return newPart ? (existing.trim() + " " + newPart).trim() : existing.trim();
+}
+
 export default function InterviewScreen({ config, interviewId, onComplete, onExit }) {
   const { type, subject, difficulty, inputMode, questions } = config;
   const [qIdx,        setQIdx]        = useState(0);
@@ -37,7 +62,6 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
   const timerRef           = useRef(null);
   const startTimeRef       = useRef(Date.now());
   const finalTranscriptRef = useRef("");
-  const finalResultsRef    = useRef([]);
   const timeUpHandledRef   = useRef(false); // prevent double submit on timeout
 
   const question = questions[qIdx];
@@ -221,7 +245,6 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
     setVoiceNote("");
     setLiveText("");
     finalTranscriptRef.current = "";
-     finalResultsRef.current = []; 
 
     if (!speechSupported) {
       setVoiceNote("Speech recognition is not supported in your browser. Please use Chrome or Edge on desktop, or switch to Text mode.");
@@ -243,23 +266,17 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
     recognition.onstart = () => setRecording(true);
 
     recognition.onresult = (event) => {
-  recognition.onresult = (event) => {
-  let interim = "";
-  for (let i = event.resultIndex; i < event.results.length; i++) {
-    const result = event.results[i];
-    const t = result[0].transcript;
-    if (result.isFinal) {
-      // Store by index instead of appending — re-fires of the same
-      // index (which happens on Android Chrome) simply overwrite,
-      // instead of duplicating the text.
-      finalResultsRef.current[i] = t.trim();
-    } else {
-      interim += t;
-    }
-  }
-  finalTranscriptRef.current = finalResultsRef.current.filter(Boolean).join(" ") + " ";
-  setLiveText((finalTranscriptRef.current + interim).trim());
-};
+      let interim = "";
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const t = event.results[i][0].transcript;
+        if (event.results[i].isFinal) {
+          finalTranscriptRef.current = mergeTranscript(finalTranscriptRef.current, t);
+        } else {
+          interim += t;
+        }
+      }
+      setLiveText((finalTranscriptRef.current + " " + interim).trim());
+    };
 
     recognition.onerror = (event) => {
       console.error("Speech recognition error:", event.error);
@@ -544,36 +561,22 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
           </div>
           <div className="chatbot-messages">
             {chatMsgs.map((m, i) => (
-              <div key={i} className={"chat-msg " + m.role} style={{ whiteSpace:"pre-wrap" }}>
+              <div key={i} className={"chat-msg " + m.role}>
                 {m.content}
               </div>
             ))}
-            {chatLoading && <div className="chat-msg bot">Thinking...</div>}
+            {chatLoading && <div className="chat-msg bot">Typing...</div>}
           </div>
           <div className="chatbot-input">
             <input
               value={chatInput}
               onChange={e => setChatInput(e.target.value)}
-              placeholder="Ask for help..."
               onKeyDown={e => e.key === "Enter" && sendChat()}
+              placeholder="Ask your AI coach..."
             />
-            <button onClick={sendChat} disabled={chatLoading}>→</button>
+            <button onClick={sendChat} disabled={chatLoading || !chatInput.trim()}>Send</button>
           </div>
         </div>
-      )}
-
-      {!chatOpen && (
-        <button
-          onClick={() => setChatOpen(true)}
-          style={{
-            position:"fixed", bottom:24, right:24, width:52, height:52,
-            borderRadius:"50%", background:"var(--accent)", color:"white",
-            fontSize:24, border:"none", cursor:"pointer",
-            boxShadow:"0 4px 20px rgba(99,102,241,0.5)", zIndex:100
-          }}
-        >
-          🤖
-        </button>
       )}
     </div>
   );
