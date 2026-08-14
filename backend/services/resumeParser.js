@@ -270,23 +270,25 @@ function parseResume(rawText){
       [
         ...PROGRAMMING_LANGUAGES,
         ...FRAMEWORKS
-      ].forEach(tech=>{
+      ].forEach(tech => {
 
+  const escapedTech = tech.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
-        if(
-          cleanLine
-          .toLowerCase()
-          .includes(tech)
-          &&
-          !currentProject.tech.includes(tech)
-        ){
+  const techRegex = new RegExp(
+    `(?<!\\w)${escapedTech}(?!\\w)`,
+    "i"
+  );
 
-          currentProject.tech.push(tech);
+  if (
+    techRegex.test(cleanLine) &&
+    !currentProject.tech.includes(tech)
+  ) {
 
-        }
+    currentProject.tech.push(tech);
 
+  }
 
-      });
+});
 
 
 
