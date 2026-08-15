@@ -18,7 +18,7 @@ export async function api(path, options = {}) {
   } catch {
     throw new Error("Cannot reach server. Please check your internet connection.");
   }
-  if (res.status === 401) {
+  if (res.status === 401 && !path.startsWith("/auth/")) {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     window.location.href = "/";
