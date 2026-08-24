@@ -31,7 +31,7 @@ export const QUESTIONS_DB = {
       Hard:   ["Explain Paging vs Segmentation.","What is Virtual Memory?","Explain Banker's Algorithm.","What is Thrashing?","Explain Memory Management techniques."]
     }
   },
-Professional: [
+HR: [
   "Tell me about yourself.",
   "What are your greatest strengths?",
   "What is one area you want to improve?",
@@ -44,7 +44,7 @@ Professional: [
   "Tell me about a challenge you faced and what you learned."
 ],
 
-Situational: [
+Behavioral: [
   "Describe a challenging project and how you handled it.",
   "Tell me about a time you worked in a team.",
   "Describe a situation where you had to meet a tight deadline.",
