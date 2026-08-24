@@ -39,7 +39,7 @@ export default function Report({ data, onRetake, onDashboard }) {
       <div className="report-page">
         {/* Header */}
         <div className="row-between mb-4">
-          <h1 style={{ fontSize: 22, fontWeight: 700 }}>Interview Report</h1>
+         <h1 style={{ fontSize: 22, fontWeight: 700 }}>Skill Practice Report</h1>
           <div className="flex gap-2">
             <button className="btn btn-outline" onClick={copy}>📋 Copy</button>
             <button className="btn btn-outline" onClick={onRetake}>🔄 Retake</button>
