@@ -61,7 +61,7 @@ export default function ResumePage() {
     <div>
       <div className="page-header">
         <h1>Resume Manager</h1>
-        <p>Upload your resume to unlock personalized AI interview questions</p>
+        <p>Upload your resume to unlock personalized AI skill-based questions</p>
       </div>
       <div className="page-body">
         <div className="resume-page">
@@ -145,9 +145,9 @@ export default function ResumePage() {
               </div>
 
               <div className="card">
-                <h3>Generated Interview Questions ({resume.questions?.length || 0})</h3>
+                <h3>Generated Skill-Based Questions ({resume.questions?.length || 0})</h3>
                 <p style={{ fontSize:13, color:"var(--muted)", marginBottom:16 }}>
-                  Go to New Interview → select "Resume" type to use these questions.
+                 Go to New Practice → select "Resume" category to use these questions.
                 </p>
                 {(resume.questions||[]).map((q,i) => (
                   <div key={i} className="q-card">
