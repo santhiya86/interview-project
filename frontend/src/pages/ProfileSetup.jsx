@@ -36,8 +36,8 @@ export default function ProfileSetup({ user, onComplete }) {
     <div className="auth-page">
       <div className="auth-card" style={{ maxWidth: 460 }}>
         <div className="auth-logo">
-          <h1>Interview<span>Pro</span></h1>
-          <p>AI-Powered Interview Platform</p>
+          
+          <p>AI Skill Coach</p>
         </div>
 
         <h2>Complete Your Profile</h2>
