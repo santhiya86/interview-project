@@ -26,11 +26,11 @@ export default function Login({ onLogin, goSignup }) {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <h1>Interview<span>Pro</span></h1>
-          <p>AI-Powered Interview Platform</p>
+          
+          <p>AI Skill Coach</p>
         </div>
         <h2>Welcome back</h2>
-        <p className="sub">Sign in to continue your interview practice</p>
+        <p className="sub">Sign in to continue your skill practice</p>
         {error && <div className="error-box">{error}</div>}
         <form onSubmit={submit}>
           <div className="field">
