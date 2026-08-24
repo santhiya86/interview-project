@@ -16,7 +16,7 @@ export default function Landing({ onLogin, onSignup }) {
          AI Skill Coach
         </div>
         <h1 style={{ fontSize:52, fontWeight:800, lineHeight:1.2, marginBottom:20, maxWidth:700 }}>
-          Ace Your Next Interview with <span style={{ color:"var(--accent)" }}>AI Coaching</span>
+       Improve Your Skills with <span style={{ color:"var(--accent)" }}>AI Coaching</span>
         </h1>
         <p style={{ fontSize:18, color:"var(--muted)", maxWidth:560, lineHeight:1.7, marginBottom:40 }}>
           Practice with real skill-based questions, get instant AI feedback on your answers, and track your improvement over time — for free.
