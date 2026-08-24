@@ -146,8 +146,7 @@ export default function Dashboard({ user, onStartSetup, refreshKey }) {
           <div className="health-banner">
 
             ⚠ AI service is temporarily unavailable.
-            Text interviews and resume-based questions are still working.
-
+          Text-based practice and resume-based questions are still working.
           </div>
 
         )}
@@ -164,7 +163,7 @@ export default function Dashboard({ user, onStartSetup, refreshKey }) {
           <div className="stat-card">
 
             <div className="label">
-              Interviews Done
+              Practice Sessions
             </div>
 
             <div className="value">
@@ -346,7 +345,7 @@ export default function Dashboard({ user, onStartSetup, refreshKey }) {
 
 
 
-        {/* Start Interview Button */}
+        {/* Start Practice Button */}
 
 
         <div style={{marginBottom:24}}>
@@ -366,7 +365,7 @@ export default function Dashboard({ user, onStartSetup, refreshKey }) {
 
           >
 
-            🎯 Start New Interview
+            🎯  Start New Practice
 
           </button>
 
@@ -527,7 +526,7 @@ export default function Dashboard({ user, onStartSetup, refreshKey }) {
 
 
             <h3>
-              No interviews yet
+              No practice sessions yet
             </h3>
 
 
