@@ -31,7 +31,7 @@ export const QUESTIONS_DB = {
       Hard:   ["Explain Paging vs Segmentation.","What is Virtual Memory?","Explain Banker's Algorithm.","What is Thrashing?","Explain Memory Management techniques."]
     }
   },
-HR: [
+Professional: [
   "Tell me about yourself.",
   "What are your greatest strengths?",
   "What is one area you want to improve?",
@@ -44,7 +44,7 @@ HR: [
   "Tell me about a challenge you faced and what you learned."
 ],
 
-Behavioral:: [
+Situational: [
   "Describe a challenging project and how you handled it.",
   "Tell me about a time you worked in a team.",
   "Describe a situation where you had to meet a tight deadline.",
@@ -56,6 +56,7 @@ Behavioral:: [
   "Tell me about a difficult decision you had to make.",
   "Describe a time you went above and beyond."
 ]
+};
 
 export function getQuestions(type, subject, difficulty) {
   if (type === "Technical") {
