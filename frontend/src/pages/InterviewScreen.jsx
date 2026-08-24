@@ -51,7 +51,7 @@ export default function InterviewScreen({ config, interviewId, onComplete, onExi
   {
     role: "bot",
     content:
-      "Hi! I am your AI interview coach. I can help you improve your interview answers."
+      "Hi! I am your AI skill coach. I can help you improve your interview answers."
   }
 ]);
   const [chatInput,   setChatInput]   = useState("");
