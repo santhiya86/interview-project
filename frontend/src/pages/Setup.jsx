@@ -25,7 +25,7 @@ export default function Setup({ onStart }) {
 
   const handleStart = async () => {
     setError("");
-    if (!type || !inputMode) { setError("Please select interview type and input mode."); return; }
+    if (!type || !inputMode) { setError("Please select practice type and input mode."); return; }
     if (type === "Technical" && (!subject || !difficulty)) { setError("Please select subject and difficulty."); return; }
 
     let questions = [];
@@ -69,7 +69,7 @@ export default function Setup({ onStart }) {
           <div className="setup-section">
             <h3>Practice Category</h3>
             <div className="pill-group">
-              {["Technical","HR","Behavioral","Resume"].map(t => (
+              {["Technical","Professional","Situational","Resume"].map(t => (
                 <Pill key={t} val={t} selected={type === t} onClick={() => { setType(t); setSubject(""); setDifficulty(""); }} />
               ))}
             </div>
