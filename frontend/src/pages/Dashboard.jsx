@@ -127,7 +127,7 @@ export default function Dashboard({ user, onStartSetup, refreshKey }) {
         </h1>
 
         <p>
-          Ready for your next interview practice session?
+         Ready for your next skill practice session?
         </p>
 
       </div>
