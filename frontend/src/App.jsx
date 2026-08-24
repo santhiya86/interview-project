@@ -141,7 +141,7 @@ export default function App() {
 function Sidebar({ screen, setScreen, user, onLogout }) {
   const nav = [
     { id:"dashboard", icon:"🏠", label:"Dashboard" },
-    { id:"setup",     icon:"🎯", label:"New Interview" },
+    { id:"setup", icon:"🎯", label:"New Practice" },
     { id:"resume",    icon:"📄", label:"Resume" },
     { id:"history",   icon:"📊", label:"History" },
     { id:"profile",   icon:"👤", label:"Profile" },
@@ -150,8 +150,8 @@ function Sidebar({ screen, setScreen, user, onLogout }) {
   return (
     <div className="sidebar">
       <div className="sidebar-logo">
-        <h2>Interview<span>Pro</span></h2>
-        <p>AI Interview Platform</p>
+        
+        <p>AI Skill Practice Platform</p>
       </div>
 
       {nav.map(n => (
