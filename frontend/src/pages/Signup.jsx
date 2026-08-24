@@ -31,11 +31,11 @@ export default function Signup({ onLogin, goLogin }) {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-logo">
-          <h1>Interview<span>Pro</span></h1>
-          <p>AI-Powered Interview Platform</p>
+          
+          <p>AI Skill Coach</p>
         </div>
         <h2>Create account</h2>
-        <p className="sub">Start your AI interview practice journey</p>
+        <p className="sub">Start your AI skill practice journey</p>
         {error && <div className="error-box">{error}</div>}
         <form onSubmit={submit}>
           <div className="field"><label>Full Name</label><input placeholder="Santhiya" value={form.name} onChange={e => set("name", e.target.value)} /></div>
