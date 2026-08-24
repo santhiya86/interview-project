@@ -59,7 +59,7 @@ export default function Setup({ onStart }) {
   return (
     <div>
       <div className="page-header">
-        <h1>Setup Interview</h1>
+        <h1>Setup Practice</h1>
         <p>Configure your practice session</p>
       </div>
       <div className="page-body">
@@ -67,7 +67,7 @@ export default function Setup({ onStart }) {
           {error && <div className="error-box" style={{ marginBottom: 20 }}>{error}</div>}
 
           <div className="setup-section">
-            <h3>Interview Type</h3>
+            <h3>Practice Category</h3>
             <div className="pill-group">
               {["Technical","HR","Behavioral","Resume"].map(t => (
                 <Pill key={t} val={t} selected={type === t} onClick={() => { setType(t); setSubject(""); setDifficulty(""); }} />
@@ -111,7 +111,7 @@ export default function Setup({ onStart }) {
           </div>
 
           <button className="btn-start" onClick={handleStart} disabled={loading}>
-            {loading ? "Starting..." : "🚀 Start Interview"}
+           {loading ? "Starting..." : "🚀 Start Practice"}
           </button>
         </div>
       </div>
