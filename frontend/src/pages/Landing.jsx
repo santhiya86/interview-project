@@ -3,7 +3,7 @@ export default function Landing({ onLogin, onSignup }) {
     <div style={{ minHeight:"100vh", background:"var(--bg)", display:"flex", flexDirection:"column" }}>
       {/* Nav */}
       <nav style={{ padding:"16px 40px", display:"flex", alignItems:"center", justifyContent:"space-between", borderBottom:"1px solid var(--border)" }}>
-        <h1 style={{ fontSize:22, fontWeight:700 }}>Interview<span style={{ color:"var(--accent)" }}>Pro</span></h1>
+       <h1 style={{ fontSize:22, fontWeight:700 }}>AI Skill<span style={{ color:"var(--accent)" }}>Coach</span></h1>
         <div style={{ display:"flex", gap:12 }}>
           <button className="btn btn-outline" onClick={onLogin} style={{ padding:"8px 20px" }}>Sign In</button>
           <button className="btn btn-accent btn" onClick={onSignup} style={{ padding:"8px 20px" }}>Get Started</button>
