@@ -30,7 +30,7 @@ export default function History({ onView, onDeleted }) {
 
   const handleDelete = async (iv) => {
     const confirmed = window.confirm(
-      `Delete "${iv.type}${iv.subject ? " — " + iv.subject : ""}" interview?\n\nThis will permanently remove it from your history and update your dashboard stats.`
+      `Delete "${iv.type}${iv.subject ? " — " + iv.subject : ""}" practice session?\n\nThis will permanently remove it from your history and update your dashboard stats.`
     );
     if (!confirmed) return;
 
@@ -66,7 +66,7 @@ export default function History({ onView, onDeleted }) {
         }
       });
     } catch {
-      setError("Could not load interview details.");
+     setError("Could not load practice details.");
     }
   };
 
@@ -85,7 +85,7 @@ export default function History({ onView, onDeleted }) {
   if (loading) {
     return (
       <div>
-        <div className="page-header"><h1>Interview History</h1></div>
+        <div className="page-header"><h1>Practice History</h1></div>
         <div className="page-body"><p style={{ color:"var(--muted)" }}>Loading...</p></div>
       </div>
     );
@@ -94,7 +94,7 @@ export default function History({ onView, onDeleted }) {
   return (
     <div>
       <div className="page-header">
-        <h1>Interview History</h1>
+        <h1>Practice History</h1>
         <p>{interviews.length} session{interviews.length !== 1 ? "s" : ""} · {completed.length} completed</p>
       </div>
 
@@ -129,8 +129,8 @@ export default function History({ onView, onDeleted }) {
         {interviews.length === 0 ? (
           <div className="empty-state">
             <div className="icon">📊</div>
-            <h3>No interviews yet</h3>
-            <p>Complete your first interview to see your history here.</p>
+       <h3>No practice sessions yet</h3>
+            <p>Complete your first practice session to see your history here.</p>
           </div>
         ) : (
           <div>
