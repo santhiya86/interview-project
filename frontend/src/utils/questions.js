@@ -31,31 +31,30 @@ export const QUESTIONS_DB = {
       Hard:   ["Explain Paging vs Segmentation.","What is Virtual Memory?","Explain Banker's Algorithm.","What is Thrashing?","Explain Memory Management techniques."]
     }
   },
-HR: [
-  "Tell me about yourself.",
-  "What are your greatest strengths?",
-  "What is one area you want to improve?",
-  "How do you communicate your ideas clearly?",
-  "How do you handle work pressure?",
-  "What motivates you to perform well?",
-  "Describe a situation where you showed leadership.",
-  "How do you prioritize multiple tasks?",
-  "How do you handle constructive feedback?",
-  "Tell me about a challenge you faced and what you learned."
-],
-
-Behavioral: [
-  "Describe a challenging project and how you handled it.",
-  "Tell me about a time you worked in a team.",
-  "Describe a situation where you had to meet a tight deadline.",
-  "Tell me about a conflict with a colleague and how you resolved it.",
-  "Describe a time you took initiative without being asked.",
-  "Tell me about a time you had to learn something quickly.",
-  "Describe a situation where you had to persuade someone.",
-  "Describe a time you received critical feedback.",
-  "Tell me about a difficult decision you had to make.",
-  "Describe a time you went above and beyond."
-]
+  HR: [
+    "Tell me about yourself.",
+    "Why should we hire you?",
+    "What is your greatest strength?",
+    "What is your biggest weakness?",
+    "Where do you see yourself in 5 years?",
+    "Why do you want to work here?",
+    "Describe a situation where you showed leadership.",
+    "How do you handle work pressure?",
+    "What motivates you?",
+    "Tell me about a time you failed and what you learned."
+  ],
+  Behavioral: [
+    "Describe a challenging project and how you handled it.",
+    "Tell me about a time you worked in a team.",
+    "Describe a situation where you had to meet a tight deadline.",
+    "Tell me about a conflict with a colleague and how you resolved it.",
+    "Describe a time you took initiative without being asked.",
+    "Tell me about a time you had to learn something quickly.",
+    "Describe a situation where you had to persuade someone.",
+    "Tell me about your biggest achievement so far.",
+    "Describe a time you received critical feedback.",
+    "Tell me about a time you went above and beyond."
+  ]
 };
 
 export function getQuestions(type, subject, difficulty) {
