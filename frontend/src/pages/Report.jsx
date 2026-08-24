@@ -23,7 +23,7 @@ export default function Report({ data, onRetake, onDashboard }) {
 
   const copy = () => {
     const txt = [
-      `InterviewPro Report — ${report.type}${report.subject ? " " + report.subject : ""}`,
+      `AI Skill Coach Report — ${report.type}${report.subject ? " " + report.subject : ""}`,
       `Overall Score: ${report.overallScore}/10 (${perfLabel})`,
       `Technical: ${report.technicalScore}/10 | Communication: ${report.communicationScore}/10`,
       `Grammar: ${report.grammarScore}/10 | Confidence: ${report.confidenceScore}/10`,
